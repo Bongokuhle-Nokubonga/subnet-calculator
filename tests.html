@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subnet Calculator Tests</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <h1>Tests</h1>
+    <p id="summary" class="result-line">Running…</p>
+    <div class="card"><ul id="list" class="mono"></ul></div>
+    <p><a href="./">← Back to the calculator</a></p>
+  </main>
+  <script type="module">
+    import { cases } from "./tests/cases.js";
+    const list = document.getElementById("list");
+    let failed = 0;
+    for (const [name, fn] of cases) {
+      const li = document.createElement("li");
+      try { fn(); li.textContent = "PASS  " + name; li.className = "net"; }
+      catch (e) { failed++; li.textContent = "FAIL  " + name + " -> " + e.message; li.className = "host"; }
+      list.appendChild(li);
+    }
+    const summary = document.getElementById("summary");
+    summary.textContent = `${cases.length - failed} passed, ${failed} failed`;
+    summary.dataset.failed = String(failed);
+  </script>
+</body>
+</html>

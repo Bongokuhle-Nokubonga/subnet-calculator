@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subnet Calculator</title>
+  <meta name="description" content="Free IPv4 subnet calculator: network, broadcast, host range, mask, wildcard, binary view, subnetting and hosts-to-prefix.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <p class="mono kicker">&gt; ipcalc</p>
+      <h1>Subnet Calculator</h1>
+      <p class="muted">Type an IPv4 address with a prefix or mask to see its network, host range and more.</p>
+    </header>
+
+    <form id="calc" class="card" autocomplete="off">
+      <label for="address">IP address and prefix</label>
+      <div class="row">
+        <input id="address" class="mono" value="192.168.10.37/26" spellcheck="false"
+               placeholder="192.168.1.10/24 or 192.168.1.10 255.255.255.0" aria-describedby="error">
+        <button type="submit" class="primary">Calculate</button>
+      </div>
+      <div class="examples">
+        Try:
+        <button type="button" data-example="192.168.1.0/24">192.168.1.0/24</button>
+        <button type="button" data-example="10.20.30.40 255.255.240.0">10.20.30.40 255.255.240.0</button>
+        <button type="button" data-example="172.16.5.1/30">172.16.5.1/30</button>
+        <button type="button" data-example="169.254.12.7/16">169.254.12.7/16</button>
+      </div>
+      <p id="error" class="error" role="alert"></p>
+    </form>
+
+    <section id="results" class="card" aria-live="polite"></section>
+
+    <section class="grid2">
+      <form id="split" class="card" autocomplete="off">
+        <h2>Split this network</h2>
+        <label for="count">Number of subnets</label>
+        <div class="row">
+          <input id="count" type="number" min="2" max="1024" value="4">
+          <button type="submit">Split</button>
+        </div>
+        <p id="split-error" class="error" role="alert"></p>
+      </form>
+      <form id="hosts" class="card" autocomplete="off">
+        <h2>How big a subnet do I need?</h2>
+        <label for="host-count">Hosts needed</label>
+        <div class="row">
+          <input id="host-count" type="number" min="1" value="50">
+          <button type="submit">Find prefix</button>
+        </div>
+        <p id="hosts-result" class="result-line"></p>
+      </form>
+    </section>
+
+    <section id="split-results" class="card" hidden></section>
+
+    <footer class="muted">
+      Built by <a href="https://bongokuhle-nokubonga.github.io/portfolio-website/">Nokubonga Nkuna</a> ·
+      <a href="https://github.com/Bongokuhle-Nokubonga/subnet-calculator">Source on GitHub</a> ·
+      <a href="tests.html">Tests</a>
+    </footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
